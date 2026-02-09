@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import FloatingHearts from "@/components/FloatingHearts";
+import MusicPlayer from "@/components/MusicPlayer";
 import LandingSection from "@/components/sections/LandingSection";
 import HowWeMetSection from "@/components/sections/HowWeMetSection";
 import AdventuresSection from "@/components/sections/AdventuresSection";
@@ -19,6 +20,7 @@ const Index = () => {
   return (
     <div className="bg-background min-h-screen">
       <FloatingHearts />
+      <MusicPlayer />
       <LandingSection onBegin={handleBegin} />
       <div ref={storyRef}>
         <HowWeMetSection />
