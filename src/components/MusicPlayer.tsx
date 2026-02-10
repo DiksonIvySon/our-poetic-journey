@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Play, Pause, SkipForward, SkipBack, Volume2, VolumeX, Music } from "lucide-react";
 
 const tracks = [
+  { title: "Why I Love You", artist: "MAJOR.", src: "/music/MAJOR_-_Why_I_Love_You.mp3" },
   { title: "You", artist: "Jesse Powell ft. Gerald Albright", src: "/music/Jesse_Powell_-_You.mp3" },
   { title: "Can We Be Lovers", artist: "Teddy Pendergrass", src: "/music/Teddy_Pendergrass_-_Can_We_Be_Lovers.mp3" },
 ];
@@ -16,6 +17,30 @@ const MusicPlayer = () => {
   const [expanded, setExpanded] = useState(false);
   const [progress, setProgress] = useState(0);
   const [hasInteracted, setHasInteracted] = useState(false);
+
+  // Autoplay on first user interaction with the page
+  useEffect(() => {
+    const tryAutoplay = () => {
+      const audio = audioRef.current;
+      if (!audio) return;
+      audio.volume = volume;
+      audio.play().then(() => {
+        setIsPlaying(true);
+        setHasInteracted(true);
+      }).catch(() => {});
+      document.removeEventListener("click", tryAutoplay);
+      document.removeEventListener("scroll", tryAutoplay);
+      document.removeEventListener("keydown", tryAutoplay);
+    };
+    document.addEventListener("click", tryAutoplay);
+    document.addEventListener("scroll", tryAutoplay);
+    document.addEventListener("keydown", tryAutoplay);
+    return () => {
+      document.removeEventListener("click", tryAutoplay);
+      document.removeEventListener("scroll", tryAutoplay);
+      document.removeEventListener("keydown", tryAutoplay);
+    };
+  }, []);
 
   useEffect(() => {
     const audio = audioRef.current;
