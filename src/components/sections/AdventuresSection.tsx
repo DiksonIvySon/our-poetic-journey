@@ -1,27 +1,16 @@
 import { motion } from "framer-motion";
 import AnimatedText from "../AnimatedText";
 
+import iceskating from "@/assets/images/8 (53).jpeg";
+import hiking from "@/assets/images/8 (43).jpeg";
+import minigolf from "@/assets/images/8 (54).jpeg";
+import adventures_img from "@/assets/images/8 (6).jpeg";
+
 const adventures = [
-  {
-    title: "Ice Skating",
-    caption: "Our first date — where falling was the best part.",
-    rotation: "-3deg",
-  },
-  {
-    title: "Hiking",
-    caption: "Every trail led us closer.",
-    rotation: "2deg",
-  },
-  {
-    title: "Mini Golf",
-    caption: "You won. (I let you.)",
-    rotation: "-1deg",
-  },
-  {
-    title: "Countless Adventures",
-    caption: "Every moment became a memory worth keeping.",
-    rotation: "3deg",
-  },
+  { title: "Ice Skating", caption: "Our first date — where falling was the best part.", rotation: "-3deg", image: iceskating },
+  { title: "Hiking", caption: "Every trail led us closer.", rotation: "2deg", image: hiking },
+  { title: "Mini Golf", caption: "You won. (I let you.)", rotation: "-1deg", image: minigolf },
+  { title: "Countless Adventures", caption: "Every moment became a memory worth keeping.", rotation: "3deg", image: adventures_img },
 ];
 
 const AdventuresSection = () => {
@@ -53,12 +42,10 @@ const AdventuresSection = () => {
               style={{ "--rotation": adv.rotation } as React.CSSProperties}
             >
               {/* Placeholder for their photos */}
-              <div className="aspect-square bg-secondary rounded-sm flex items-center justify-center overflow-hidden">
-                <div className="text-center p-4">
-                  <span className="text-5xl mb-3 block">
-                    {i === 0 ? "⛸️" : i === 1 ? "🥾" : i === 2 ? "⛳" : "✨"}
-                  </span>
-                  <p className="font-display text-lg text-muted-foreground">{adv.title}</p>
+              <div className="aspect-square bg-secondary rounded-sm overflow-hidden relative">
+                <img src={adv.image} alt={adv.title} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                  <p className="font-display text-lg text-white">{adv.title}</p>
                 </div>
               </div>
               <p className="text-center mt-3 font-poem text-sm text-warm-dark italic">
@@ -71,5 +58,28 @@ const AdventuresSection = () => {
     </section>
   );
 };
+
+// const adventures = [
+//   {
+//     title: "Ice Skating",
+//     caption: "Our first date — where falling was the best part.",
+//     rotation: "-3deg",
+//   },
+//   {
+//     title: "Hiking",
+//     caption: "Every trail led us closer.",
+//     rotation: "2deg",
+//   },
+//   {
+//     title: "Mini Golf",
+//     caption: "You won. (I let you.)",
+//     rotation: "-1deg",
+//   },
+//   {
+//     title: "Countless Adventures",
+//     caption: "Every moment became a memory worth keeping.",
+//     rotation: "3deg",
+//   },
+// ];
 
 export default AdventuresSection;

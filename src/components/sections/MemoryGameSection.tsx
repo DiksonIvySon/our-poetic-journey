@@ -2,19 +2,27 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedText from "../AnimatedText";
 
+import image1 from "@/assets/images/8 (4).jpeg";
+import image2 from "@/assets/images/8 (13).jpeg";
+import image3 from "@/assets/images/8 (51).jpeg";
+import image4 from "@/assets/images/8 (49).jpeg";
+import image5 from "@/assets/images/8 (29).jpeg";
+import image6 from "@/assets/images/8 (26).jpeg";
+
 const memoryPairs = [
-  { id: 1, emoji: "⛸️", label: "Ice Skating" },
-  { id: 2, emoji: "🥾", label: "Hiking" },
-  { id: 3, emoji: "⛳", label: "Mini Golf" },
-  { id: 4, emoji: "💕", label: "Love" },
-  { id: 5, emoji: "📞", label: "Daily Calls" },
-  { id: 6, emoji: "✈️", label: "Distance" },
+  { id: 1, image: image1, label: "Ice Skating" },
+  { id: 2, image: image2, label: "Hiking" },
+  { id: 3, image: image3, label: "Mini Golf" },
+  { id: 4, image: image4, label: "Love" },
+  { id: 5, image: image5, label: "Daily Calls" },
+  { id: 6, image: image6, label: "Distance" },
 ];
+
 
 interface Card {
   uniqueId: number;
   id: number;
-  emoji: string;
+  image: string;
   label: string;
   flipped: boolean;
   matched: boolean;
@@ -139,27 +147,33 @@ const MemoryGameSection = () => {
             >
               <AnimatePresence mode="wait">
                 {card.flipped || card.matched ? (
-                  <motion.span
+                  <motion.div
                     key="front"
-                    initial={{ rotateY: 90 }}
-                    animate={{ rotateY: 0 }}
-                    exit={{ rotateY: 90 }}
+                    initial={{ rotateY: 90, opacity: 0 }}
+                    animate={{ rotateY: 0, opacity: 1 }}
+                    exit={{ rotateY: 90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
+                    className="w-full h-full"
                   >
-                    {card.emoji}
-                  </motion.span>
+                    <img
+                      src={card.image}
+                      alt={card.label}
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  </motion.div>
                 ) : (
                   <motion.span
                     key="back"
                     initial={{ rotateY: 90 }}
                     animate={{ rotateY: 0 }}
                     exit={{ rotateY: 90 }}
-                    className="text-rose/30"
+                    className="text-rose/30 text-3xl"
                   >
                     ♥
                   </motion.span>
                 )}
               </AnimatePresence>
+
             </motion.button>
           ))}
         </div>
